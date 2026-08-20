@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useParams } from "next/navigation";
 import weatherData from "@/data/weather.json";
-import Logo from "./Logo";
-import CurrentWeather from "./CurrentWeather";
+import Logo from "@/app/components/Logo";
+import CurrentWeather from "@/app/components/CurrentWeather";
+import WeatherDetails from "@/app/components/WeatherDetails";
 
-export default function Main() {
-  const [activeCityId, setActiveCityId] = useState(1);
-  const activeCity = weatherData.cities.find((el) => el.id === activeCityId);
+export default function page() {
+  const { city } = useParams();
+  const activeCity = weatherData.cities.find((el) => el.name === city);
   const backgroundImage = activeCity?.current.background;
+
   return (
     <>
       <div
@@ -18,9 +20,8 @@ export default function Main() {
         <div className="mx-auto w-[88.8%] flex items-center justify-between">
           <Logo />
         </div>
-        <div className="flex flex-col gap-7.5">
-          <CurrentWeather activeCity={activeCity} />
-        </div>
+        <CurrentWeather activeCity={activeCity} />
+        <WeatherDetails activeCity={activeCity} />
       </div>
     </>
   );
