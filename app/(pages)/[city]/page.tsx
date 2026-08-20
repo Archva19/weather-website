@@ -5,6 +5,7 @@ import weatherData from "@/data/weather.json";
 import Logo from "@/app/components/Logo";
 import CurrentWeather from "@/app/components/CurrentWeather";
 import WeatherDetails from "@/app/components/WeatherDetails";
+import Search from "@/app/components/Search";
 
 export default function page() {
   const { city } = useParams();
@@ -19,6 +20,7 @@ export default function page() {
       >
         <div className="mx-auto w-[88.8%] flex items-center justify-between">
           <Logo />
+          <Search data = {weatherData}/>
         </div>
         <CurrentWeather activeCity={activeCity} />
         <WeatherDetails activeCity={activeCity} />
