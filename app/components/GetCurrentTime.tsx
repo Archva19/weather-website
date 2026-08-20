@@ -23,7 +23,7 @@ export default function GetCurrentTime({ activeCity }: any) {
   }, [activeCity?.timezone]);
   return (
     <>
-      <p className="text-[10px]">{time} - Wednesday, 20 Aug '26</p>
+      <p className="text-[10px] md:text-[16px] xl:text-[18px]">{time} - Wednesday, 19 Aug '26</p>
     </>
   );
 }
