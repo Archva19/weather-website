@@ -5,12 +5,20 @@ import FutureForecast from "./FutureForecast";
 import { useEffect, useState } from "react";
 import Search from "./Search";
 import {motion} from "framer-motion"
+import { City } from "@/types/types";
+
+interface WeatherDetailsProps{
+    activeCity:City,
+    searchInput:string,
+    setSearchInput: (value:string) => void;
+}
+
 
 export default function WeatherDetails({
   activeCity,
   searchInput,
   setSearchInput,
-}: any) {
+}:WeatherDetailsProps) {
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {

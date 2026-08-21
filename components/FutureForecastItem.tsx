@@ -3,8 +3,15 @@
 import { useState } from "react";
 import DetailsCurrentWeatherList from "./DetailsCurrentWeatherList";
 import { AnimatePresence, motion } from "framer-motion";
+import { ForecastItem } from "@/types/types";
 
-export default function FutureForecastItem({ item, isOpen, onToggle }: any) {
+interface FutureForecastItemProps{
+  item:ForecastItem,
+  isOpen:boolean,
+  onToggle: () => void;
+}
+
+export default function FutureForecastItem({ item, isOpen, onToggle }:FutureForecastItemProps) {
   return (
     <>
       <div className="flex flex-col gap-5">
@@ -13,7 +20,7 @@ export default function FutureForecastItem({ item, isOpen, onToggle }: any) {
           className="cursor-pointer w-full flex items-center justify-between text-[14px] md:text-[18px]"
         >
           <div className="flex items-center gap-4">
-            <img className="w-10 h-10" loading="eager" src={item.icon} alt={item.desctiption} />
+            <img className="w-10 h-10" loading="eager" src={item.icon} alt={item.description} />
             <div className="flex flex-col gap-1 items-start">
               <p>{item.date}</p>
               <p className="opacity-70">{item.description}</p>

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import GetCurrentTime from "./GetCurrentTime";
 import { motion } from "framer-motion";
+import { City } from "@/types/types";
 
-export default function CurrentWeather({ activeCity }: any) {
+export default function CurrentWeather({ activeCity }:{activeCity:City}) {
   return (
     <>
       <motion.section

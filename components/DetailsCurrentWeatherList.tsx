@@ -1,8 +1,15 @@
 "use client";
 
+import { Details, ForecastItem} from "@/types/types";
 import { useEffect, useState } from "react";
 
-export default function DetailsCurrentWeatherList({ item, listType }: any) {
+interface DetailsCurrentWeatherListProps{
+  item: Details | ForecastItem,
+  listType:string
+}
+
+
+export default function DetailsCurrentWeatherList({ item, listType }:DetailsCurrentWeatherListProps) {
   let weatherDetails = [];
   const [isDesktop, setIsDesktop] = useState(false);
 

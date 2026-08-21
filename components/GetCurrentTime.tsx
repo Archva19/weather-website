@@ -1,8 +1,9 @@
 "use client";
 
+import { City } from "@/types/types";
 import React, { useEffect, useState } from "react";
 
-export default function GetCurrentTime({ activeCity }: any) {
+export default function GetCurrentTime({ activeCity }:{activeCity:City}) {
   const [time, setTime] = useState("");
 
   useEffect(() => {
