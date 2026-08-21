@@ -6,6 +6,7 @@ import Logo from "@/app/components/Logo";
 import CurrentWeather from "@/app/components/CurrentWeather";
 import WeatherDetails from "@/app/components/WeatherDetails";
 import Search from "@/app/components/Search";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function page() {
@@ -13,7 +14,7 @@ export default function page() {
   const activeCity = weatherData.cities.find((el) => el.name === city);
   const backgroundImage = activeCity?.current.background;
 
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = useState<null | boolean>(null);
 
   useEffect(() => {
     function handleResize() {
@@ -27,8 +28,8 @@ export default function page() {
   }, []);
 
   const [searchInput, setSearchInput] = useState("");
-  
 
+  if (isDesktop === null) return null;
 
   return (
     <>
@@ -37,14 +38,25 @@ export default function page() {
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
         <div className="mx-auto w-[88.8%] flex items-center justify-between md:w-[89.9%] xl:flex-col xl:items-start xl:h-full xl:mx-0 xl:pl-29 xl:pr-30 xl:pt-9.25 xl:pb-21.25 xl:absolute xl:top-0 xl:w-screen">
-            <Logo />
-             {!isDesktop &&  <Search searchInput = {searchInput} setSearchInput={setSearchInput} />}
+          <Logo />
+          {!isDesktop && (
+            <Search searchInput={searchInput} setSearchInput={setSearchInput} />
+          )}
           {isDesktop && <CurrentWeather activeCity={activeCity} />}
         </div>
-        <div className="absolute bottom-0 w-full flex flex-col gap-7.5 md:gap-11 xl:w-131.5 xl:h-full xl:right-0 xl:top-0">
+        <motion.div
+          initial={{ width: isDesktop ? 0 : "100%", height: isDesktop ? "100%" : 0 }}
+          animate={{ width: isDesktop ? "526px" : "100%", height: isDesktop ? "100%" : "auto" }}
+          transition={{ duration: 0.7 }}
+          className="absolute bottom-0 w-full flex flex-col gap-7.5 md:gap-11 xl:w-131.5 xl:h-full xl:right-0 xl:top-0"
+        >
           {!isDesktop && <CurrentWeather activeCity={activeCity} />}
-          <WeatherDetails searchInput = {searchInput} setSearchInput={setSearchInput} activeCity={activeCity} />
-        </div>
+          <WeatherDetails
+            searchInput={searchInput}
+            setSearchInput={setSearchInput}
+            activeCity={activeCity}
+          />
+        </motion.div>
       </div>
     </>
   );

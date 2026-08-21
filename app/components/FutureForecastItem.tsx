@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import DetailsCurrentWeatherList from "./DetailsCurrentWeatherList";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function FutureForecastItem({ item, isOpen, onToggle }: any) {
   return (
@@ -12,18 +13,33 @@ export default function FutureForecastItem({ item, isOpen, onToggle }: any) {
           className="cursor-pointer w-full flex items-center justify-between text-[14px] md:text-[18px]"
         >
           <div className="flex items-center gap-4">
-            <img className="w-10 h-10" src={item.icon} alt={item.desctiption} />
+            <img className="w-10 h-10" loading="eager" src={item.icon} alt={item.desctiption} />
             <div className="flex flex-col gap-1 items-start">
               <p>{item.date}</p>
               <p className="opacity-70">{item.description}</p>
             </div>
           </div>
           <div className="flex items-center gap-1.5 md:gap-3">
-            <p className = "md:text-[24px]">{item.temperature}°</p>
-            <div className="w-1.5 h-1.5 border-b border-l rotate-135 border-white md:w-2 md:h-2"></div>
+            <p className="md:text-[24px]">{item.temperature}°</p>
+            <motion.div 
+            initial={{rotate:135}}
+            animate={{rotate: isOpen ? 180 : 0}}
+            transition={{duration: 0.3, ease:"easeInOut"}}
+            className="w-1.5 h-1.5 border-b border-l rotate-135 border-white md:w-2 md:h-2"></motion.div>
           </div>
         </button>
-        {isOpen && <DetailsCurrentWeatherList item={item} listType="future" />}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              transition={{ duration: 0.2, ease: "easeIn" }}
+              exit={{ height: 0, opacity: 0 }}
+            >
+              <DetailsCurrentWeatherList item={item} listType="future" />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );

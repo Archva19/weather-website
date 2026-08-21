@@ -1,4 +1,5 @@
 import DetailsCurrentWeatherList from "./DetailsCurrentWeatherList";
+import { motion } from "framer-motion";
 
 export default function DetailsCurrentWeather({ activeCity }: any) {
   return (
@@ -9,9 +10,17 @@ export default function DetailsCurrentWeather({ activeCity }: any) {
           <p className="font-medium h-4 md:h-5.25">
             {activeCity.current.description}
           </p>
-          <DetailsCurrentWeatherList item={activeCity.details} listType = "current"/>
+          <DetailsCurrentWeatherList
+            item={activeCity.details}
+            listType="current"
+          />
         </div>
-        <div className="border-b border-b-white h-12.5 mb-9.25 w-full md:mb-10.25 xl:w-92.75"></div>
+        <motion.div
+          initial={{ width: 0, opacity: 0 }}
+          animate={{ width: "100%", opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="border-b border-b-white h-12.5 mb-9.25 w-full md:mb-10.25 xl:w-92.75"
+        ></motion.div>
       </div>
     </>
   );
