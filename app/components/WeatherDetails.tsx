@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import DetailsCurrentWeather from "./DetailsCurrentWeather";
 import FutureForecast from "./FutureForecast";
 import { useEffect, useState } from "react";
 import Search from "./Search";
-import weatherData from "@/data/weather.json";
+import {motion} from "framer-motion"
 
 export default function WeatherDetails({
   activeCity,

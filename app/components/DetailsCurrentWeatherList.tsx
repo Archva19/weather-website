@@ -68,23 +68,21 @@ export default function DetailsCurrentWeatherList({ item, listType }: any) {
       ]);
   return (
     <>
-      <div className="w-full flex flex-col gap-7.5 text-[14px] md:text-[18px]">
-        {weatherDetails.map((item) => (
-          <div
-            key={item.id}
-            className="w-full flex items-center justify-between h-auto"
-          >
-            <p className=" opacity-70">{item.title}</p>
-            <div className="flex items-center gap-[20.95px] md:gap-6.5">
-              <p>{item.value}</p>
-              <img
-                src={item.icon}
-                alt={item.title}
-              />
+        <div 
+        className="w-full flex flex-col gap-7.5 text-[14px] md:text-[18px] overflow-hidden">
+          {weatherDetails.map((item) => (
+            <div
+              key={item.id}
+              className="w-full flex items-center justify-between h-auto"
+            >
+              <p className=" opacity-70">{item.title}</p>
+              <div className="flex items-center gap-[20.95px] md:gap-6.5">
+                <p>{item.value}</p>
+                <img src={item.icon} alt={item.title} />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
     </>
   );
 }
