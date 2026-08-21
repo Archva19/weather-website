@@ -2,13 +2,19 @@
 import { ChevronRight } from "lucide-react";
 import weatherData from "@/data/weather.json";
 import {motion} from "framer-motion"
+import { City } from "@/types/types";
 
-export default function Search({ searchInput, setSearchInput }: any) {
+interface SearchProps{
+  searchInput:string,
+    setSearchInput: (value:string) => void;
+}
+
+export default function Search({ searchInput, setSearchInput }:SearchProps) {
   let filteredCities =
     searchInput.trim() === ""
       ? []
       : weatherData.cities.filter(
-          (city: any) =>
+          (city:City) =>
             city.name.toLowerCase().includes(searchInput.toLowerCase()) ||
             city.country.toLowerCase().includes(searchInput.toLowerCase()),
         );
@@ -39,7 +45,7 @@ export default function Search({ searchInput, setSearchInput }: any) {
 
         {searchInput.trim() !== "" && (
           <div className="pt-2 h-auto absolute -bottom-20 w-full text-[10px] flex min-h-20 flex-col gap-1 items-start justify-start text-white md:text-[16px] xl:text-[20px]  xl:static">
-            {filteredCities.map((city: any) => (
+            {filteredCities.map((city: City) => (
               <motion.a
               initial={{width: "auto"}}
               whileHover={{width: "100%"}}

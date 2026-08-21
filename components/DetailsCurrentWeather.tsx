@@ -1,7 +1,8 @@
+import { City } from "@/types/types";
 import DetailsCurrentWeatherList from "./DetailsCurrentWeatherList";
 import { motion } from "framer-motion";
 
-export default function DetailsCurrentWeather({ activeCity }: any) {
+export default function DetailsCurrentWeather({ activeCity }:{activeCity:City}) {
   return (
     <>
       <div className="w-full flex flex-col items-center text-[14px] md:text-[18px] xl:items-start">

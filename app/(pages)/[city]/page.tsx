@@ -2,16 +2,16 @@
 
 import { useParams } from "next/navigation";
 import weatherData from "@/data/weather.json";
-import Logo from "@/app/components/Logo";
-import CurrentWeather from "@/app/components/CurrentWeather";
-import WeatherDetails from "@/app/components/WeatherDetails";
-import Search from "@/app/components/Search";
+import Logo from "@/components/Logo";
+import CurrentWeather from "@/components/CurrentWeather";
+import WeatherDetails from "@/components/WeatherDetails";
+import Search from "@/components/Search";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-export default function page() {
+export default function Page() {
   const { city } = useParams();
-  const activeCity = weatherData.cities.find((el) => el.name === city);
+  const activeCity = weatherData.cities.find((el) => el.name === city) || weatherData.cities[0];
   const backgroundImage = activeCity?.current.background;
 
   const [isDesktop, setIsDesktop] = useState<null | boolean>(null);
